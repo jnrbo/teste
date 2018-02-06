@@ -1,0 +1,34 @@
+<?php
+/**
+ * @see Trezo_BoletoFacil_Block_Info_Boletofacil
+ */
+?>
+<p><?php echo $this->escapeHtml($this->getMethod()->getTitle()) ?></p>
+<?php if ($this->getInstructions()): ?>
+    <table>
+        <tbody>
+            <tr>
+                <td><?php echo nl2br($this->getInstructions()) ?></td>
+            </tr>
+        </tbody>
+    </table>
+<?php endif; ?>
+
+<?php
+$order = $this->getInfo()->getOrder();
+
+if ($order) {
+    try {
+        $boleto = Mage::getModel('boletofacil/boleto')->generate($order);
+        if ($boleto->getId()) {
+            echo "<a href=\"{$boleto->getUrl()}\" target=\"_blank\">Imprimir Boleto</a>";
+        }
+        else {
+            echo "<b>Não foi possível gerar o Boleto<br>"
+                . "Favor contate o administrador do site</b>";
+        }
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
+?>

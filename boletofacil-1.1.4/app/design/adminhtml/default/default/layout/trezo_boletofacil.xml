@@ -1,0 +1,10 @@
+<layout>    
+    <adminhtml_sales_order_view>
+        <reference name="sales_order_tabs">
+            <action method="addTab">
+                <name>boletofacil</name>
+                <block>boletofacil/adminhtml_sales_order_view_tab_boleto</block>
+            </action>
+        </reference>
+    </adminhtml_sales_order_view>
+</layout>
